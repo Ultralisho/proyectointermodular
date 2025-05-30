@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-sports CS2</title>
+  <style>
+    :root {
+      --accent: #00ffcc;
+      --bg: #0d0d0d;
+      --card-bg: rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 60px 30px;
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 5;
+      max-width: 800px;
+      width: 90%;
+      padding: 30px;
+      background: rgba(13, 13, 13, 0.7);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+
+    .hero-content h2 {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      text-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+    }
+
+    .hero-content p {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      color: #f0f0f0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #0d0d0d;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+    }
+
+    .cta-button:hover {
+      background-color: #00d6aa;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(0, 255, 204, 0.5);
+    }
+
+    /* CARRUSEL INICIO */
+    #inicio {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+    }
+
+    .carousel-track {
+      display: flex;
+      animation: slide 18s infinite;
+      width: 300%;
+      height: 100%;
+    }
+
+    .carousel-track img {
+      width: 33.33%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33.33% { transform: translateX(-33.33%); }
+      66.66% { transform: translateX(-66.66%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* SECCIÓN COLEECIÓN ACTUALIZADA */
+    #coleccion {
+      background-color: #111;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    #titulo-coleccion {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    #titulo-coleccion::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .teams-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      background: linear-gradient(145deg, #1a1a1a, #222);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 255, 204, 0.2);
+    }
+
+    .team-header {
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .team-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px;
+      border: 2px solid var(--accent);
+    }
+
+    .team-name {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .team-content {
+      padding: 20px;
+      text-align: left;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-country {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+
+    .team-description {
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: #ddd;
+      flex-grow: 1;
+    }
+
+    .team-stats {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-top: 15px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    #contacto {
+      background: url('contactobg.jpg') center/cover no-repeat;
+      background-color: #1f1f1f;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #333;
+      color: #fff;
+    }
+
+    form button {
+      background-color: var(--accent);
+      color: #000;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #00d6aa;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    }
+
+    footer {
+      background-color: #1f1f1f;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    /* Media Queries para Responsividad */
+    @media (max-width: 1200px) {
+      .teams-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h2 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      .carousel {
+        height: 80vh;
+      }
+      
+      .hero-content {
+        padding: 20px;
+      }
+      
+      .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      .teams-container {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+      }
+      
+      #titulo-coleccion {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h2 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+      
+      .carousel {
+        height: 70vh;
+      }
+      
+      nav a {
+        font-size: 0.9em;
+        margin: 0 10px;
+      }
+      
+      #titulo-coleccion {
+        font-size: 1.6rem;
+      }
+      
+      .team-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>E-sports CS2</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#coleccion">Colección</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="inicio">
+    <div class="carousel">
+      <div class="carousel-track">
+        <img src="img1.jpg" alt="CS2 Imagen 1">
+        <img src="img2.jpg" alt="CS2 Imagen 2">
+        <img src="img3.jpg" alt="CS2 Imagen 3">
+      </div>
+    </div>
+    
+    <div class="hero-content">
+      <h2>Domina el Campo de Batalla</h2>
+      <p>Bienvenido al epicentro del Counter-Strike 2. Descubre noticias, estrategias, equipos profesionales y todo lo que necesitas para elevar tu juego al siguiente nivel.</p>
+      <a href="#coleccion" class="cta-button">Explorar Equipos</a>
+    </div>
+  </section>
+
+  <section id="coleccion">
+    <h3 id="titulo-coleccion">Equipos Profesionales</h3>
+    
+    <div class="teams-container">
+
+      <!-- Fila 1 -->
+      <div class="team-card">
+        <div class="team-header">
+          <img src="faze1.jpg" alt="FaZe Clan" class="team-logo">
+          <h4 class="team-name">FaZe Clan</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🌎 Internacional</div>
+          <p class="team-description">Equipo legendario con múltiples títulos internacionales. Reconocido por su constancia en la escena CS2 y su estilo agresivo.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">4</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#1</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2016</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="g21.jpg" alt="G2 Esports" class="team-logo">
+          <h4 class="team-name">G2 Esports</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇪🇺 Europa</div>
+          <p class="team-description">Un equipo con mucha historia y personalidad, siempre dando espectáculo dentro y fuera del servidor. Conocidos por su juego táctico.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">2</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#3</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2014</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="navi1.jpg" alt="Na'Vi" class="team-logo">
+          <h4 class="team-name">Natus Vincere</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇺🇦 Ucrania</div>
+          <p class="team-description">La casa de leyendas como s1mple. Campeones de Majors y una gran base de fans. Estrategias innovadoras y juego agresivo.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#2</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2009</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 2 -->
+      <div class="team-card">
+        <div class="team-header">
+          <img src="vitality1.jpg" alt="Vitality" class="team-logo">
+          <h4 class="team-name">Team Vitality</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇫🇷 Francia</div>
+          <p class="team-description">El equipo francés con un estilo agresivo y vistoso. Siempre entre los favoritos con ZywOo como estrella indiscutible.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">1</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#4</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2013</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="cloud91.jpg" alt="Cloud9" class="team-logo">
+          <h4 class="team-name">Cloud9</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇺🇸 Estados Unidos</div>
+          <p class="team-description">El equipo norteamericano que ha ganado un Major histórico. Conocidos por su juego impredecible y momentos de brillantez.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">1</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#6</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2013</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="fnatic1.png" alt="Fnatic" class="team-logo">
+          <h4 class="team-name">Fnatic</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇸🇪 Suecia</div>
+          <p class="team-description">Uno de los equipos más exitosos en la historia de CS:GO. Con múltiples títulos y una cultura de juego estratégico.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#5</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2004</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 3 -->
+      <div class="team-card">
+        <div class="team-header">
+          <img src="liquid1.jpg" alt="Team Liquid" class="team-logo">
+          <h4 class="team-name">Team Liquid</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇺🇸 Estados Unidos</div>
+          <p class="team-description">Conocidos por su increíble racha de torneos en 2019. Equipo consistente con un estilo de juego metódico y preciso.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#7</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2015</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="virtuspro1.jpg" alt="Virtus.pro" class="team-logo">
+          <h4 class="team-name">Virtus.pro</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇷🇺 Rusia</div>
+          <p class="team-description">Equipo ruso con una base de fans apasionada. Conocidos por su juego agresivo y momentos de brillantez táctica.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#9</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2003</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="mouz1.jpg" alt="MOUZ" class="team-logo">
+          <h4 class="team-name">MOUZ</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇩🇪 Alemania</div>
+          <p class="team-description">Equipo europeo con una fuerte presencia en la escena competitiva. Conocidos por desarrollar jóvenes talentos.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#8</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2002</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 4 -->
+      <div class="team-card">
+        <div class="team-header">
+          <img src="astralis1.png" alt="Astralis" class="team-logo">
+          <h4 class="team-name">Astralis</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇩🇰 Dinamarca</div>
+          <p class="team-description">La dinastía danesa que dominó CS:GO con 4 títulos de Major. Innovadores en estrategias y preparación táctica.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">4</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#10</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2016</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="spirit1.png" alt="Team Spirit" class="team-logo">
+          <h4 class="team-name">Team Spirit</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇷🇺 Rusia</div>
+          <p class="team-description">El equipo revelación que ha escalado rápidamente en los rankings. Con un estilo de juego agresivo y sorpresivo.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#11</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2015</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-header">
+          <img src="ENCE1.png" alt="ENCE" class="team-logo">
+          <h4 class="team-name">ENCE</h4>
+        </div>
+        <div class="team-content">
+          <div class="team-country">🇫🇮 Finlandia</div>
+          <p class="team-description">El equipo finlandés que sorprendió al mundo llegando a la final del Major. Con un juego estructurado y disciplinado.</p>
+          <div class="team-stats">
+            <div class="stat">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Majors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">#12</div>
+              <div class="stat-label">Ranking</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">2013</div>
+              <div class="stat-label">Fundado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>¿Tienes alguna duda o sugerencia? Completa el formulario o escríbenos.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+      <form action="https://formsubmit.co/lishospain@gmail.com" method="POST" style="flex: 1; min-width: 300px; max-width: 500px;">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+        <textarea rows="5"  name="mensaje" placeholder="Tu mensaje" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+
+      <div style="flex: 1; min-width: 300px; max-width: 500px;">
+        <iframe
+          src="https://www.google.com/maps?q=Benidorm,+España&output=embed"
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 12px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:20px;">Email: contacto@esportscs2.com</p>
+  </section>
+
+  <footer>
+    <p>© 2025 E-sports CS2 | contacto@esportscs2.com | Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
